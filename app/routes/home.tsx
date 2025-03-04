@@ -8,6 +8,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export default function HomePage() {
+  return <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-8">MY AI PROJECT</h1>;
 }

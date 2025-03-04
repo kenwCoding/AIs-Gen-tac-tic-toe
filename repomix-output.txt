@@ -47,7 +47,10 @@ Directory Structure
 ================================================================
 app/
   routes/
+    home/
+      index.jsx
     home.tsx
+    welcome.jsx
   welcome/
     logo-dark.svg
     logo-light.svg
@@ -69,6 +72,22 @@ Files
 ================================================================
 
 ================
+File: app/routes/home/index.jsx
+================
+import { Link } from "react-router";
+
+export default function Home() {
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-8">MY AI PROJECT</h1>
+      <nav>
+        <Link to="/welcome" className="text-blue-600 dark:text-blue-400 hover:underline">Go to Welcome Page</Link>
+      </nav>
+    </main>
+  );
+}
+
+================
 File: app/routes/home.tsx
 ================
 import type { Route } from "./+types/home";
@@ -82,6 +101,15 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  return <Welcome />;
+}
+
+================
+File: app/routes/welcome.jsx
+================
+import { Welcome } from "../welcome/welcome";
+
+export default function WelcomePage() {
   return <Welcome />;
 }
 
@@ -450,7 +478,7 @@ File: app/routes.ts
 ================
 import { type RouteConfig, index } from "@react-router/dev/routes";
 
-export default [index("routes/home.tsx")] satisfies RouteConfig;
+export default [index("routes/home/index.jsx")] satisfies RouteConfig;
 
 ================
 File: .dockerignore
