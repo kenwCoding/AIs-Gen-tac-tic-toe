@@ -51,7 +51,22 @@ body {
 }
 
 .status {
-  font-size: 1.25rem;
+  .reset-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-button:hover {
+    background-color: #2563eb;
+  }  font-size: 1.25rem;
   font-weight: bold;
   color: #1f2937;
 }

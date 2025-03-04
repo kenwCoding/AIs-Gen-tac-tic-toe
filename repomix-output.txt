@@ -51,7 +51,7 @@ app/
   welcome/
     logo-dark.svg
     logo-light.svg
-    welcome.tsx
+    welcome.jsx
   app.css
   root.tsx
   routes.ts
@@ -140,8 +140,9 @@ File: app/welcome/logo-light.svg
 </svg>
 
 ================
-File: app/welcome/welcome.tsx
+File: app/welcome/welcome.jsx
 ================
+import React from "react";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -164,6 +165,7 @@ export function Welcome() {
           </div>
         </header>
         <div className="max-w-[300px] w-full space-y-6 px-4">
+          <TicTacToe />
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
             <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
               What&apos;s next?
@@ -188,6 +190,59 @@ export function Welcome() {
       </div>
     </main>
   );
+}
+
+function TicTacToe() {
+  const [board, setBoard] = React.useState(Array(9).fill(null));
+  const [isXNext, setIsXNext] = React.useState(true);
+
+  const handleClick = (index) => {
+    if (board[index] || calculateWinner(board)) return;
+    const newBoard = board.slice();
+    newBoard[index] = isXNext ? "X" : "O";
+    setBoard(newBoard);
+    setIsXNext(!isXNext);
+  };
+
+  const winner = calculateWinner(board);
+  const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? "X" : "O"}`;
+
+  return (
+    <div className="tic-tac-toe">
+      <div className="status">{status}</div>
+      <div className="board">
+        {board.map((cell, index) => (
+          <button
+            key={index}
+            className="cell"
+            onClick={() => handleClick(index)}
+          >
+            {cell}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function calculateWinner(board) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+  return null;
 }
 
 const resources = [
@@ -249,6 +304,48 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tic-tac-toe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.cell {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #1f2937;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cell:hover {
+  background-color: #f3f4f6;
+}
+
+.status {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
 }
 
 ================

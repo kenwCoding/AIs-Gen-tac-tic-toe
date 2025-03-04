@@ -1,3 +1,4 @@
+import React from "react";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -60,12 +61,15 @@ function TicTacToe() {
   };
 
   const winner = calculateWinner(board);
-  const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? "X" : "O"}`;
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setIsXNext(true);
+  };  const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? "X" : "O"}`;
 
   return (
     <div className="tic-tac-toe">
       <div className="status">{status}</div>
-      <div className="board">
+      <button onClick={resetGame} className="reset-button">Reset Game</button>      <div className="board">
         {board.map((cell, index) => (
           <button
             key={index}
