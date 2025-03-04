@@ -430,7 +430,7 @@ export default {
 ================
 File: README.md
 ================
-# Welcome to React Router!
+# Welcome to My Project!
 
 A modern, production-ready template for building full-stack React applications using React Router.
 
