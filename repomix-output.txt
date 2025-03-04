@@ -100,8 +100,8 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export default function HomePage() {
+  return <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-8">MY AI PROJECT</h1>;
 }
 
 ================
@@ -478,7 +478,7 @@ File: app/routes.ts
 ================
 import { type RouteConfig, index } from "@react-router/dev/routes";
 
-export default [index("routes/home/index.jsx")] satisfies RouteConfig;
+export default [index("routes/home.tsx")] satisfies RouteConfig;
 
 ================
 File: .dockerignore
