@@ -4,6 +4,6 @@ export default [
   index("routes/home/index.jsx"),
   {
     path: "/welcome",
-    module: "routes/welcome.jsx"
+    file: "routes/welcome.jsx"
   }
 ] satisfies RouteConfig;
